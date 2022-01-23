@@ -1,0 +1,27 @@
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-title {
+    font-size: 200px;
+    font-family: 'Dongle', sans-serif, bold;
+    line-height: 1.75;
+}
+
+.main-col .home-title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .home-title {
+        font-size: 70px;
+
+    }
+    
+}
