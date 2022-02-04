@@ -1,0 +1,48 @@
+.new-post-content {
+    margin-bottom: 50px;
+}
+
+#add-post-div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#add-post-btn {
+    width: 10%;  
+    display: flex;
+    justify-content: center; 
+    margin: 0;
+}
+
+.header-post-img{
+    margin-bottom: 40px;
+}
+
+.paragraf-form{
+    padding: 20px 0;
+}
+
+.paragraf-spacing {
+    margin-top: 40px;
+}
+
+#add-paragraf-btn {
+    width: 10%;  
+    display: flex;
+    justify-content: center; 
+    margin: 0;
+    background-color: rgb(201, 176, 224);
+}
+
+#save-post-btn {
+    width: 10%;  
+    display: flex;
+    justify-content: center; 
+    margin: 0;
+    margin-left: 20px;
+    background-color: rgb(127, 24, 223);
+} 
+
+.post-data {
+    margin: 10px 0;
+}

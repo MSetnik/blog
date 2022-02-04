@@ -1,29 +1,29 @@
+import { Link } from 'react-router-dom'
 import './index.css'
 
 const PostCard = ({
   color = 'rgba(102, 51, 153, 0.2)',
-  onClick = () => {}
+  id = 1,
+  img = 'https://www.boomfit.com/img/leoblog/b/1/22/lg-b-artigo%20apps.jpg',
+  title = 'Fitness zdravlje',
+  sumamry
 }) => {
   return (
-    <div className='post-container container' style={{ backgroundColor: color }} onClick={onClick}>
+    <Link className='container post-navigation post-container' to={`/post/${id}`}>
         <div className='post-img-container'>
-            <img className='post-img' src="https://www.boomfit.com/img/leoblog/b/1/22/lg-b-artigo%20apps.jpg" alt="Italian Trulli"/>
+            <img className='post-img' src={img} alt="Italian Trulli"/>
         </div>
         <div className='post-content-container'>
-            <h1 className='post-title'>Fitness zdravlje</h1>
+            <h1 className='post-card-title'>{title}</h1>
 
             <div className='post-text-container'>
-                <p className='post-text'>
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of
-                de Finibus Bonorum et Malorum
-                 (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,
-                Lorem ipsum dolor sit amet..
-                , comes from a line in section 1.10.32.
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                <p className='post-card-text'>
+                  {sumamry}
                 </p>
             </div>
         </div>
-    </div>
+    </Link>
+
   )
 }
 

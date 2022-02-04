@@ -3,6 +3,13 @@
     float: center !important;
   }
   
+.navbar {
+    margin: 0;
+    padding: 0;
+}
+
+
+
 .navbar .navbar-collapse {
     text-align: center;
 }
@@ -12,7 +19,6 @@
     float: center !important;
     justify-content: space-between !important;
     flex-direction: row !important;
-
 }
 
 .navbar-nav {

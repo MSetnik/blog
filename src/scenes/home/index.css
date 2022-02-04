@@ -1,16 +1,20 @@
-.row {
+.main-grid{
     display: flex;
     justify-content: center;
-    align-items: center;
+}
+
+.home-image {
+    display: flex;
+    justify-content: center;
+    object-fit: cover;
+}
+
+.logo-img {
+    height: 600px;
+    margin-top: -250px;
 }
 
 .home-title {
-    font-size: 200px;
-    font-family: 'Dongle', sans-serif, bold;
-    line-height: 1.75;
-}
-
-.main-col .home-title {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -19,9 +23,15 @@
 
 
 @media screen and (max-width: 1000px) {
-    .home-title {
-        font-size: 70px;
+    .logo-img {
+        height: 300px;
+        margin-top: -100px;
+    }
 
+    .main-grid {
+        display: flex;
+        justify-content: center;
+        
     }
     
 }

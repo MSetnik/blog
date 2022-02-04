@@ -1,29 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import './App.css'
 import reportWebVitals from './reportWebVitals'
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from 'react-router-dom'
 
-// components
-import Home from './scenes/home'
-import Navbar from './components/organisms/navbar'
+import App from './App'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Navbar />
-
-      <Routes>
-        <Route path="/blog" element={<Home />} />
-        {/* <Route path="expenses" element={<Home />} /> */}
-        {/* <Route path="invoices" element={<Invoices />} /> */}
-      </Routes>
-    </BrowserRouter>
+   <App/>
   </React.StrictMode>,
   document.getElementById('root')
 )
