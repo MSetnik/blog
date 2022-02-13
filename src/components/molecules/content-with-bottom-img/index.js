@@ -1,3 +1,6 @@
+// Animacije
+import { motion } from 'framer-motion'
+
 const ContentWithBottomImg = ({
   text,
   image
@@ -5,12 +8,19 @@ const ContentWithBottomImg = ({
   return (
       <div className="content-container">
         <div className="">
-            <p className='post-text'>
+            <motion.p className='post-text'
+              whileInView={{
+                opacity: 1,
+                transition: { from: 0, duration: 1.5 }
+              }}>
                 {text}
-            </p>
+            </motion.p>
         </div>
         <div className='post-image'>
-            <img className='img' src={image}></img>
+            <motion.img whileInView={{
+              opacity: 1,
+              transition: { from: 0, duration: 1.5 }
+            }} className='img' src={image}></motion.img>
         </div>
       </div>
 

@@ -14,6 +14,18 @@ export const reducer = (state = initialState, action) => {
         paragrafs: action.payload
       }
 
+    case actions.CLEAR_PARAGRAFS:
+      return {
+        ...state,
+        paragrafs: action.payload
+      }
+
+    case actions.USER_LOGIN:
+      return {
+        ...state,
+        userLoggedIn: true
+      }
+
     default:
       return state
   }

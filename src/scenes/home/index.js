@@ -9,6 +9,9 @@ import logo2 from '../../static/svg-logo-2.svg'
 import { collection, addDoc, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase-init'
 
+// Animations
+import { motion } from 'framer-motion'
+
 const Home = () => {
   const [posts, setPosts] = useState([])
 
@@ -26,10 +29,12 @@ const Home = () => {
           id: doc.id,
           title: doc.data().title,
           image: doc.data().image,
-          sumamry: doc.data().summary
+          sumamry: doc.data().summary,
+          date: doc.data().date
         }
 
         lPosts.push(post)
+        lPosts.sort((a, b) => b.date - a.date)
       })
     } catch (e) {
       console.error('Error adding document: ', e)
@@ -43,7 +48,7 @@ const Home = () => {
         <div className='home-image'>
           <img src={logo2} className='logo-img'/>
         </div>
-        <div className="row row-cols-auto main-grid" >
+        <div className="row row-cols-3 main-grid" >
 
           {
             posts.map((p, index) => (
@@ -54,6 +59,8 @@ const Home = () => {
                 img={p.image}
                 title={p.title}
                 sumamry={p.sumamry}
+                admin={false}
+
               />
             ))
           }

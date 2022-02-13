@@ -1,0 +1,11 @@
+.new-post-btn-div {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding-right: 40px;
+}
+
+.save-post-btn {
+    position: absolute;
+   
+}

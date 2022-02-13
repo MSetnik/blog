@@ -14,6 +14,9 @@ import ContentWithBottomImg from '../../components/molecules/content-with-bottom
 import { collection, getDoc, getDocs, doc } from 'firebase/firestore'
 import { db, firebase } from '../../firebase-init'
 
+// Animations
+import { motion } from 'framer-motion'
+
 const Post = ({
   title = '19 Healthy Lifestyle Habits That Dont Break Your Wallet',
   image
@@ -100,9 +103,16 @@ const Post = ({
 
   return (
     <div className="container post">
-      <div className='header-img' style={{ backgroundImage: `url( ${post.image})` }}>
-      </div>
-      <div className="main-col single-post-col">
+      <motion.div animate={{
+        y: 0,
+        transition: { from: -100, duration: 1 }
+      }} className='header-img' style={{ backgroundImage: `url( ${post.image})` }}>
+      </motion.div>
+      <motion.div
+        whileInView={{
+          y: 0,
+          transition: { from: 100, duration: 1 }
+        }} className="main-col single-post-col">
         <h1 className='post-title'>
           {post.title}
         </h1>
@@ -140,7 +150,7 @@ const Post = ({
           })
         }
 
-      </div>
+      </motion.div>
     </div>
   )
 }

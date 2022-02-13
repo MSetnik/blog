@@ -33,6 +33,7 @@
 .post-text {
     font-size: 22px;
     color: rgb(109, 109, 109);
+    white-space: pre-wrap;
 }
 
 .post-image {
@@ -53,6 +54,7 @@ img {
 .content-container {
     margin: 35px 0;
 }
+
 
 
 

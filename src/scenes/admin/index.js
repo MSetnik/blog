@@ -1,41 +1,56 @@
 import './index.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 // Components
 import PostCard from '../../components/organisms/post-card'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo2 from '../../static/svg-logo-2.svg'
 
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase-init'
 import Login from '../../components/organisms/login'
 import NewPost from '../../components/organisms/new-post'
+import AdminHome from './home'
+
+// Store
+import { StoreContext, reducer } from '../../store/reducer'
+import { actions, createAction } from '../../store/actions'
 
 const Admin = () => {
+  const store = useContext(StoreContext)
+  const state = store.state
+  const dispatch = store.dispatch
+
   const [posts, setPosts] = useState([])
-  const [logginSuccess, setLoginSuccess] = useState(null)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    let isMounted = true
+
+    if (isMounted) {
+      if (state.userLoggedIn) {
+        navigate('/admin/home')
+      }
+    }
+
+    return () => { isMounted = false }
+  }, [])
 
   const login = async (username, password) => {
     const lPosts = []
 
     try {
-      const querySnapshot = await getDocs(collection(db, 'admin'))
       const col = collection(db, 'admin')
       const q = query(col, where('username', '==', username), where('password', '==', password))
       const querySnapshots = await getDocs(q)
       querySnapshots.forEach((doc) => {
         if (!doc.data()) {
-          setLoginSuccess(false)
           return
         }
 
-        // const user = {
-        //   id: doc.id,
-        //   username: doc.data().title,
-        //   password: doc.data().image
-        // }
-
-        setLoginSuccess(true)
+        dispatch(createAction(actions.USER_LOGIN, true))
+        navigate('/admin/home')
       })
     } catch (e) {
       console.error('Error adding document: ', e)
@@ -46,12 +61,7 @@ const Admin = () => {
   return (
     <div className="container admin-container">
       <div className="main-col">
-          {
-              (!logginSuccess || logginSuccess === null)
-                ? <Login onClick={login}/>
-                : <NewPost />
-          }
-
+          <Login onClick={login}/>
       </div>
 
     </div>

@@ -9,16 +9,19 @@ import { db } from '../../../firebase-init'
 // Components
 import AddParagraf from '../../molecules/add-paragraf'
 import { StoreContext } from '../../../store/reducer'
+import { useNavigate } from 'react-router-dom'
 
 const NewPost = () => {
   const store = useContext(StoreContext)
   const state = store.state
   const dispatch = store.dispatch
 
+  const navigate = useNavigate()
+
   const [paragrafCount, setParagrafCount] = useState(1)
-  const [headerImage, setHeaderImage] = useState()
-  const [title, setTItle] = useState()
-  const [summary, setSummary] = useState()
+  const [headerImage, setHeaderImage] = useState('')
+  const [title, setTItle] = useState('')
+  const [summary, setSummary] = useState('')
 
   const addParagraf = () => {
     setParagrafCount(paragrafCount + 1)
@@ -38,22 +41,19 @@ const NewPost = () => {
       title: title
     }
 
-    console.log(state.paragrafs)
-    console.log(postData)
-
     // Add a new document with a generated id.
     const postContentRef = await addDoc(collection(db, 'post-content'), {
       content: state.paragrafs
     })
-    console.log('Document written with ID: ', postContentRef.id)
 
     // Add a new document with a generated id.
     const postRef = await setDoc(doc(db, 'post', postContentRef.id), postData)
-    console.log('Document written with ID: ', postContentRef.id)
+
+    navigate('/')
   }
 
   return (
-    <div className="new-post-content">
+    <div className="new-post-content container">
         <div className='home-image'>
             <img src={logo2} className='logo-img'/>
         </div>

@@ -1,0 +1,36 @@
+.edit-logo-img {
+    width: 200px;
+    height: 200px;
+}
+
+.edit-post-image{
+    justify-content: center;
+    display: flex;
+}
+
+.post-header-image-div {
+    display: flex;
+    
+}
+
+.image-src-input{
+    height: 50px;
+}
+
+.post-header-image{
+    width: 200px;
+    aspect-ratio: 16/9;
+}
+
+.edit-post-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+#add-post-div{
+    display: flex;
+}
+
+.delete-post-btn{
+    background-color: #dc3545 !important;
+}

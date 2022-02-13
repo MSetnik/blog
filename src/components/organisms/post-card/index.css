@@ -6,6 +6,8 @@
     display: flex;
     flex-direction: column;
     margin: 15px 15px;
+    transition: transform .2s ease;
+
 
 }
 
@@ -14,6 +16,8 @@
     object-fit: contain;
     display: flex;
     justify-content: center;
+    overflow: hidden
+    
     
 }
 
@@ -21,7 +25,12 @@
     object-fit: cover;
     width: 100%;
     aspect-ratio: 2/1;
-    /* border-radius: 10px 10px 0 0; */
+
+}
+
+.post-container:hover {
+    transform: scale(1.05);
+    /* transition:scale(1.1) 0.5s; */
 }
 
 .post-content-container {

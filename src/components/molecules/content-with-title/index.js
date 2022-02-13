@@ -1,13 +1,26 @@
+// Animations
+import { motion } from 'framer-motion'
+
 const ContentWithTitle = ({
   title,
   text
 }) => {
   return (
     <div className="content-container ">
-        <h4 className="post-subtitle">{title}</h4>
-        <p className='post-text'>
+        <motion.h4
+          whileInView={{
+            opacity: 1,
+            transition: { from: 0, duration: 1 }
+          }}
+          className="post-subtitle">{title}</motion.h4>
+        <motion.p
+          whileInView={{
+            opacity: 1,
+            transition: { from: 0, duration: 1.5 }
+          }}
+          className='post-text'>
             {text}
-        </p>
+        </motion.p>
     </div>
   )
 }

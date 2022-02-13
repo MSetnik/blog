@@ -1,3 +1,4 @@
 export const initialState = {
-  paragrafs: []
+  paragrafs: [],
+  userLoggedIn: false
 }
