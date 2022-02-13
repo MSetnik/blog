@@ -21,7 +21,9 @@ const PostCard = ({
           whileInView={{
             opacity: 1,
             transition: { from: 0, duration: 1 }
-          }}>
+          }}
+          style={{ opacity: 0 }}
+          >
         <div className='post-img-container'>
             <img className='post-img' src={img} alt="Italian Trulli"/>
         </div>

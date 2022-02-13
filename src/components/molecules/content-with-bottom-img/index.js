@@ -12,7 +12,9 @@ const ContentWithBottomImg = ({
               whileInView={{
                 opacity: 1,
                 transition: { from: 0, duration: 1.5 }
-              }}>
+              }}
+              style={{ opacity: 0 }}
+              >
                 {text}
             </motion.p>
         </div>
@@ -20,7 +22,7 @@ const ContentWithBottomImg = ({
             <motion.img whileInView={{
               opacity: 1,
               transition: { from: 0, duration: 1.5 }
-            }} className='img' src={image}></motion.img>
+            }} style={{ opacity: 0 }} className='img' src={image}></motion.img>
         </div>
       </div>
 
