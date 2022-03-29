@@ -46,6 +46,7 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     font-weight: bold;
+    text-align: start;
 
 }
 
@@ -58,6 +59,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
+    font-size: 16px;
 }
 
 a {

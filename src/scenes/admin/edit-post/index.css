@@ -25,6 +25,7 @@
 .edit-post-btns {
     display: flex;
     justify-content: space-between;
+    margin:50px 0;
 }
 
 #add-post-div{
@@ -33,4 +34,23 @@
 
 .delete-post-btn{
     background-color: #dc3545 !important;
+}
+
+
+.ql-editor > h1 > span {
+    font-size: 36px !important;
+    font-weight: bold !important;
+
+}
+
+.ql-editor > h1 {
+    font-size: 36px !important;
+    font-weight: bold !important;
+    text-align: center;
+    color: rgb(109, 109, 109) !important;
+}
+
+.ql-editor > h2 {
+    font-size: 28px !important;
+    color: rgb(109, 109, 109) !important;
 }

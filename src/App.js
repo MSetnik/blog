@@ -17,7 +17,7 @@ import { reducer, StoreContext } from './store/reducer'
 import { actions, createAction } from './store/actions'
 import AdminHome from './scenes/admin/home'
 import AdminEditPost from './scenes/admin/edit-post'
-import NewPost from './components/organisms/new-post'
+import NewPost from './scenes/admin/new-post'
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState)

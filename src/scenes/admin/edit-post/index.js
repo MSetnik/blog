@@ -13,30 +13,23 @@ import AddParagraf from '../../../components/molecules/add-paragraf'
 import { StoreContext } from '../../../store/reducer'
 
 // url params
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { actions, createAction } from '../../../store/actions'
+import Editor from '../../../components/organisms/editor'
 
 const AdminEditPost = () => {
-  const store = useContext(StoreContext)
-  const state = store.state
-  const dispatch = store.dispatch
-
-  const { pathname } = useLocation()
-  const postId = useParams().id
-
-  const navigate = useNavigate()
-
-  const [paragrafCount, setParagrafCount] = useState(1)
+  const [postText, setPostText] = useState('')
   const [headerImage, setHeaderImage] = useState()
   const [title, setTItle] = useState()
   const [summary, setSummary] = useState()
 
-  const [post, setPost] = useState({ image: '', summary: '', date: '', title: '' })
-  const [postContent, setPostContent] = useState([])
+  const store = useContext(StoreContext)
+  const state = store.state
+  const dispatch = store.dispatch
 
-  const [childrenParagrafs, setChildrenParagrafs] = useState([])
+  const postId = useParams().id
 
-  const children = []
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!state.userLoggedIn) {
@@ -46,23 +39,6 @@ const AdminEditPost = () => {
       getPostContent()
     }
   }, [])
-
-  const addParagraf = () => {
-    children.push(<AddParagraf/>)
-  }
-
-  if (postContent.length !== 0) {
-    postContent.forEach((content, i) => {
-      children.push(<AddParagraf
-              index={i}
-              paragrafType={content.type}
-              paragrafImage={content.image}
-              paragrafSubtitle={content.subtitle}
-              paragrafText={content.text}
-          />
-      )
-    })
-  }
 
   const updatePost = async () => {
     const postData = {
@@ -83,18 +59,8 @@ const AdminEditPost = () => {
     const contentRef = doc(db, 'post-content', postId)
 
     await updateDoc(contentRef, {
-      content: state.paragrafs
+      content: postText
     })
-
-    // // Add a new document with a generated id.
-    // const postContentRef = await addDoc(collection(db, 'post-content'), {
-    //   content: state.paragrafs
-    // })
-    // console.log('Document written with ID: ', postContentRef.id)
-
-    // // Add a new document with a generated id.
-    // const postRef = await setDoc(doc(db, 'post', postContentRef.id), postData)
-    // console.log('Document written with ID: ', postContentRef.id)
 
     dispatch(createAction(actions.CLEAR_PARAGRAFS, []))
 
@@ -135,7 +101,7 @@ const AdminEditPost = () => {
       const querySnapshot = await getDocs(collection(db, 'post-content'))
       querySnapshot.forEach((doc) => {
         if (postId === doc.id) {
-          setPostContent(doc.data().content)
+          setPostText(doc.data().content)
         }
       })
     } catch (e) {
@@ -145,8 +111,14 @@ const AdminEditPost = () => {
 
   return (
     <div className="new-post-content container">
-        <div className='edit-post-image'>
-            <img src={logo2} className='edit-logo-img'/>
+
+        <div className='edit-post-btns'>
+            <input data-bs-toggle="modal" data-bs-target="#deletePostModal" id="save-post-btn" className='delete-post-btn' type="button" value="Obriši post"/>
+
+            <div id="add-post-div">
+                <input data-bs-toggle="modal" data-bs-target="#myModal" id="save-post-btn" type="button" value="Spremi"/>
+            </div>
+
         </div>
 
         <div className="form-group header-post-img">
@@ -167,42 +139,14 @@ const AdminEditPost = () => {
 
         </div>
 
-        <h2>
-            <strong>
-                *Obavezno spremiti sve paragrafe*
-            </strong>
-        </h2>
-
-        {children}
-
-        <div className='edit-post-btns'>
-            <input data-bs-toggle="modal" data-bs-target="#deletePostModal" id="save-post-btn" className='delete-post-btn' type="button" value="Obriši post"/>
-
-            <div id="add-post-div">
-                {/* <input onClick={() => addParagraf()} id="add-paragraf-btn" type="button" value="Novi paragraf"/> */}
-                <input data-bs-toggle="modal" data-bs-target="#myModal" id="save-post-btn" type="button" value="Završi"/>
-            </div>
-
+        <div>
+            <Editor
+                value={postText}
+                setValue={setPostText}
+            />
         </div>
 
-        <div className="modal" tabIndex="-1" id='myModal'>
-            <div className="modal-dialog  modal-dialog-centered">
-                <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title">Upozorenje!</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div className="modal-body">
-                    <p>Provjerite jeste li spremili sve paragrafe.</p>
-                </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Zatvori i provjeri</button>
-                    <button onClick={() => updatePost()} type="button" data-bs-dismiss="modal" className="btn btn-primary">Potvrdi i nastavi</button>
-                </div>
-                </div>
-            </div>
-        </div>
-
+        {/* Modali */}
         <div className="modal" tabIndex="-1" id='deletePostModal'>
             <div className="modal-dialog  modal-dialog-centered">
                 <div className="modal-content">
@@ -221,36 +165,24 @@ const AdminEditPost = () => {
             </div>
         </div>
 
-        {/* <div className="row row-cols-1 main-grid" >
-            <div id="add-post-div">
-                <input id="add-post-btn" type="button" value="Dodaj paragraf"/>
+        <div className="modal" tabIndex="-1" id='myModal'>
+            <div className="modal-dialog  modal-dialog-centered">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Upozorenje!</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                    <p>Spremi promjene?</p>
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
+                    <button onClick={() => updatePost()} type="button" data-bs-dismiss="modal" className="btn btn-primary">Da</button>
+                </div>
+                </div>
             </div>
-            <form>
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlSelect1">Tip paragrafa</label>
-                    <select value={type} onChange={(e) => setType(e.target.value)} className="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                </div>
+        </div>
 
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlInput1">Image link</label>
-                    <input disabled={parseInt(type) !== 2} className="form-control" id="exampleFormControlInput1" placeholder="url"/>
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlTextarea1">Podnaslov</label>
-                    <textarea disabled={parseInt(type) !== 1} className="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlTextarea1">Text</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="25"></textarea>
-                </div>
-            </form>
-        </div> */}
     </div>
   )
 }
