@@ -61,6 +61,7 @@ const Post = ({
       querySnapshot.forEach((doc) => {
         if (postId === doc.id) {
           setPostContent(doc.data().content)
+          formatPost(doc.data().content)
         }
       })
     } catch (e) {
@@ -69,6 +70,35 @@ const Post = ({
 
     // setPostContent(postContent)
   }
+
+  const formatPost = (htmlString) => {
+    const parser = new DOMParser()
+    const htmlDoc = parser.parseFromString(htmlString, 'text/html')
+
+    const postContentDiv = document.querySelector('.post-content')
+
+    const children = htmlDoc.querySelector('body')
+
+    const img = htmlDoc.body.querySelectorAll('img')
+
+    console.log(img)
+
+    for (let i = 0; i < img.length; i++) {
+      img[i].parentElement.classList.add('post-image')
+      img[i].classList.add('post-details-image')
+    }
+
+    postContentDiv.innerHTML = htmlDoc.body.innerHTML
+
+    // children.forEach(child => {
+    //   console.log(child)
+    // })
+
+    // do whatever you want with htmlDoc.getElementsByTagName('a');
+    // return htmlDoc.
+  }
+
+  console.log(postContent)
 
   // console.log(typeof postContent)
   // console.log(postContent)
@@ -116,7 +146,11 @@ const Post = ({
         <h1 className='post-title'>
           {post.title}
         </h1>
-        {
+
+        <div className='post-content'>
+          {/* {postContent} */}
+        </div>
+        {/* {
           postContent.map((content, index) => {
             console.log(content)
             if (parseInt(content.type) === 1) {
@@ -148,7 +182,7 @@ const Post = ({
 
             return null
           })
-        }
+        } */}
 
       </motion.div>
     </div>

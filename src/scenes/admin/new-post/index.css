@@ -1,5 +1,6 @@
 .new-post-content {
     margin-bottom: 50px;
+    margin-top: 20px;
 }
 
 #add-post-div {
@@ -39,7 +40,6 @@
     display: flex;
     justify-content: center; 
     margin: 0;
-    margin-left: 20px;
     background-color: rgb(127, 24, 223);
 } 
 

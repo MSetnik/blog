@@ -9,7 +9,7 @@ import logo2 from '../../static/svg-logo-2.svg'
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase-init'
 import Login from '../../components/organisms/login'
-import NewPost from '../../components/organisms/new-post'
+import NewPost from './new-post'
 import AdminHome from './home'
 
 // Store

@@ -18,19 +18,42 @@
 
 .post-title {
     font-size: 50px;
-    text-align: center;
+    text-align: center !important;
     margin-bottom: 100px;
     font-weight: bold;
 }
 
 
-.post-subtitle{
-    margin-bottom: 15px;
-    font-weight: 600;
+.post-content > h1 {
+    font-size: 36px;
+    text-align: center !important;
+    font-weight: bold;
+    color: rgb(109, 109, 109);
+
+
+}
+
+.post-content > h2 {
+    font-size: 32px;
 }
 
 
-.post-text {
+.post-content > h1 > span {
+    font-size: 36px !important;
+    font-weight: bold !important;
+    color: rgb(109, 109, 109);
+
+}
+
+/* 
+
+h2{
+    margin-bottom: 15px;
+    font-weight: 600;
+} */
+
+
+.post-text, p {
     font-size: 22px;
     color: rgb(109, 109, 109);
     white-space: pre-wrap;
@@ -42,11 +65,11 @@
   
 }
 
-img {
-    width: 50%;
+.post-details-image {
+    width: 100%;
     display: flex;
     align-self: center;
-    object-fit: contain;
+    object-fit: cover;
     aspect-ratio: 16/9;
 
 }
